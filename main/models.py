@@ -86,7 +86,6 @@ class Article(models.Model):  # Статьи
 
 
 class Reviews(models.Model):  # Отзывы
-    title = models.CharField(max_length=500)
     owner = models.CharField(max_length=100)
     description = models.TextField()
     email = models.CharField(max_length=50)
