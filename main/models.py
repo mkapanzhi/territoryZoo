@@ -47,7 +47,7 @@ class ProductImage(models.Model):  # Картинки
     image = models.ImageField(upload_to='product/')
 
     def __str__(self):
-        return self.product
+        return self.product.name
 
 
 class Brand(models.Model):  # Бренд
@@ -70,7 +70,7 @@ class ProductCount(models.Model):  # Количество и фасовка пр
     count = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.product
+        return self.product.name
 
 
 class Article(models.Model):  # Статьи
@@ -92,4 +92,4 @@ class Reviews(models.Model):  # Отзывы
     pet = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.title
+        return self.owner
