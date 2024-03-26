@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.models import Animal, Product
+from main.models import Animal, Product, Brand, Article
 
 
 def get_page(request):
@@ -8,9 +8,13 @@ def get_page(request):
     animals = Animal.objects.all()
     products = products_queryset.order_by('-top_product')[:3]
     new_products = products_queryset.order_by('-id')[:10]
+    brands = Brand.objects.all()
+    articles = Article.objects.all
     context = {
         'animals': animals,
         'products': products,
-        'new_products': new_products
+        'new_products': new_products,
+        'brands': brands,
+        'articles': articles
     }
     return render(request, 'index.html', context)
