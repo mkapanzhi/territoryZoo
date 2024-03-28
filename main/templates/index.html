@@ -403,7 +403,11 @@
                                     />
                                 </svg>
                             </div>
-                            <input type="text" name="search" placeholder="Поиск"/>
+                            <form action="{% url 'result' %}" method="POST">
+                                {% csrf_token %}
+                            <input type="text" name="search" placeholder="Поиск" minlength="3">
+                                <button>Send</button>
+                                </form>
                         </search>
                         <nav class="header__bottom-nav">
                             <ul class="header__bottom-nav-list">

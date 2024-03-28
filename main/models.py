@@ -21,7 +21,7 @@ class Product(models.Model):  # Товар
     top_product = models.PositiveIntegerField(default=0)  # счетчик покупок товара
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 class CategoryProduct(models.Model):  # Категории
