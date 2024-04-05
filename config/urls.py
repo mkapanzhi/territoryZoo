@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path, include
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
     path('coockie/', include('gamecoockie.urls'))
+
 
 ]
 

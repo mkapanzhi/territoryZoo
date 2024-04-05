@@ -425,7 +425,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <div class="header__bottom-basket">
+                        <a href="{% url 'basket' %}" class="header__bottom-basket">
                             <div>
                                 <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -454,8 +454,8 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <p>0</p>
-                        </div>
+                            <p>{{cart|length}}</p>
+                        </a>
                         <div class="header__bottom-action">
                             <div class="header__bottom-search-mob">
                                 <svg
@@ -609,6 +609,10 @@
                                     </ul>
                                     <div class="slider__item-price-basket">
                                         <p class="slider__item-price">{{ i.price }} BYN</p>
+                                        <form action="{% url 'cart_add' i.id%}" method="POST">
+                                            {{ cart_product_form }}
+                                            {% csrf_token %}
+                                            <button>
                                         <div class="slider__item-basket">
                                             <div class="slider__item-basket-text">+</div>
                                             <div class="slider__item-basket-img">
@@ -628,6 +632,8 @@
                                                 </svg>
                                             </div>
                                         </div>
+                                                </button>
+                                        </form>
                                     </div>
                                     <button type="button" class="slider__item-btn">Купить в 1 клик</button>
                                 </article>
@@ -1351,6 +1357,6 @@
 <script defer src="{% static 'js/slick.min.js' %}"></script>
 <script defer src="{% static 'js/slider.js' %}"></script>
 <script src="{% static 'js/modals.js' %}"></script>
-<script src="{% static 'js/basket.js' %}"></script>
+<!--<script src="{% static 'js/basket.js' %}"></script>-->
 </body>
 </html>

@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 
+from cart.cart import Cart
+from cart.forms import CartAddProductForm
 from main.models import Animal, Product, Brand, Article
 
 
@@ -9,7 +12,9 @@ def get_page(request):
     products = products_queryset.order_by('-top_product')[:3]
     new_products = products_queryset.order_by('-id')[:10]
     brands = Brand.objects.all()
-    articles = Article.objects.all
+    articles = Article.objects.all()
+    cart_product_form = CartAddProductForm()
+
 
     # products2 = Product.objects.filter(name__icontains='р')
     products3 = Animal.objects.filter(product__id=1)
@@ -20,7 +25,8 @@ def get_page(request):
         'products': products,
         'new_products': new_products,
         'brands': brands,
-        'articles': articles
+        'articles': articles,
+        'cart_product_form': cart_product_form
     }
     return render(request, 'index.html', context)
 
@@ -46,5 +52,30 @@ def get_result_search(request):
             context['error'] = 'Введите более 3 символов'
     return render(request, 'result_search.html', context)
 
+
 def get_basket(request):
-    return render(request, 'basket.html')
+    cart = Cart(request)
+    context = {
+        'cart': cart
+    }
+    return render(request, 'basket.html', context)
+
+
+@require_POST
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = CartAddProductForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(product=product,
+                 quantity=cd['quantity'],
+                 update_quantity=cd['update'])
+    return redirect('main')
+
+
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect('basket')
