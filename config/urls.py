@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-    path('coockie/', include('gamecoockie.urls'))
+    path('coockie/', include('gamecoockie.urls')),
+    path('api-auth/', include('api.urls'))
 
 
 ]

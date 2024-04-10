@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'main',
     'gamecoockie',
     'cart',
-    'orders'
+    'orders',
+    'rest_framework',
+    'api'
 ]
 
 MIDDLEWARE = [
