@@ -35,17 +35,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     "debug_toolbar",
     'main',
     'gamecoockie',
     'cart',
     'orders',
     'rest_framework',
-    'api'
+    'api',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -139,3 +144,5 @@ INTERNAL_IPS = [
 ]
 
 CART_SESSION_ID = 'cart'
+
+CORS_ALLOW_ALL_ORIGINS = True

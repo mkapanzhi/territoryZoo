@@ -20,3 +20,31 @@ class AnimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Animal
         fields = "__all__"
+
+
+class ShopSerializer(serializers.Serializer):
+    name = serializers.CharField()
+
+
+class BooksSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    shop_set = ShopSerializer(many=True)
+
+
+class AuthorSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    books_set = BooksSerializer(many=True)
+
+
+class AuthorSerializer1(serializers.Serializer):
+    name = serializers.CharField()
+
+
+class BooksSerializer1(serializers.Serializer):
+    name = serializers.CharField()
+    author = AuthorSerializer1(many=True)
+
+
+class ShopSerializer1(serializers.Serializer):
+    name = serializers.CharField()
+    book = BooksSerializer1()

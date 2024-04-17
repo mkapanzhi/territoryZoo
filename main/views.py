@@ -79,3 +79,9 @@ def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('basket')
+
+def animal_add(request):
+    return render(request, 'animal_add.html')
+
+def getFile2(request):
+    return render(request, 'file2.html')
